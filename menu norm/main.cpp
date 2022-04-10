@@ -10,6 +10,7 @@
 #include "Models/UserInheritance/Teacher.h"
 
 const int AR_SIZE = 10;
+const int maxCount = 50;
 
 #pragma region
 int sqr25() {
@@ -324,7 +325,7 @@ int main() {
     const int runMenuUsers = 5;
     MyMenuItem items_user[runMenuUsers]{ MyMenuItem{"Add Users", addUser}, MyMenuItem{"Out Users", printUser}, MyMenuItem{"Delete Users", deleteUser}, MyMenuItem{"Sort Users", sortUser}, MyMenuItem{"Back to Main Menu", backMainMenu} };
     MyMenu menu_user("Users Menu", items_user, runMenuUsers);
-    MenuManage managerOfMenu(menu, menu_user, school, student, teacher);
+    MenuManage managerOfMenu(menu, menu_user);
     while (managerOfMenu.runMainMenu()) {
         if (managerOfMenu.getMain_select() == Users()) {
             do {

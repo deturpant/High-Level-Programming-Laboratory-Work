@@ -4,12 +4,9 @@
 #include "Models/UserInheritance/Teacher.h"
 using namespace KVA;
 
-MenuManage::MenuManage(MyMenu mainMenu, MyMenu subMenu, School* school, Student* student, Teacher* teacher) {
+MenuManage::MenuManage(MyMenu mainMenu, MyMenu subMenu) {
 	m_mainMenu = mainMenu;
 	m_subMenu = subMenu;
-	m_school = school;
-	m_student = student;
-	m_teacher = teacher;
 }
 int MenuManage::runMainMenu() {
 	MenuManage::m_mainMenu.runCommand();
@@ -24,13 +21,4 @@ int MenuManage::getMain_select() {
 }
 int MenuManage::getSub_select() {
 	return MenuManage::m_subMenu.getSelect();
-}
-School MenuManage::getSchool() {
-	return *m_school;
-}
-Student MenuManage::getStudent() {
-	return *m_student;
-}
-Teacher MenuManage::getTeacher() {
-	return *m_teacher;
 }
