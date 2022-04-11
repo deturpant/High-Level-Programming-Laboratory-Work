@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <cstdlib>
 #include <string>
-#include "MenuManage.h"
+#include "MyMenu/MenuManage.h"
 #include "MyMenu/MyMenu.h"
 #include "MyMenu/MyMenuItem.h"
 #include "Models/UserInheritance/User.h"
@@ -123,7 +123,7 @@ void addTeacher(Teacher* teacher) {
 void addUser(School* school, Student* student, Teacher* teacher) {
     system("cls");
     using namespace KVA;
-    cout << "Выбермте класс для добавления:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
+    cout << "Выберите класс для добавления:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
     cin >> switcher;
     switch (switcher) {
@@ -168,7 +168,7 @@ void printTeacher(Teacher* teacher) {
 }
 void printUser(School* school, Student* student, Teacher* teacher) {
     system("cls");
-    cout << "Выбермте класс для вывода информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
+    cout << "Выберите класс для вывода информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
     cin >> switcher;
     switch (switcher) {
@@ -223,7 +223,7 @@ void deleteStudent(Student* student) {
 void deleteUser(School* school, Student* student, Teacher *teacher) {
     using namespace KVA;
     system("cls");
-    cout << "Выбермте класс для удаления информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
+    cout << "Выберите класс для удаления информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
     cin >> switcher;
     switch (switcher) {
@@ -277,7 +277,7 @@ void sortTeacher(Teacher* teacher) {
 }
 void sortUser(School *school, Student *student, Teacher *teacher) {
     system("cls");
-    cout << "Выбермте класс для соритровки информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
+    cout << "Выберите класс для соритровки информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
     cin >> switcher;
     switch (switcher) {
