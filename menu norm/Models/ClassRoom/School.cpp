@@ -65,6 +65,6 @@ bool School::operator>(const School& other) {
 School& School::operator=(const School& other) {
 	m_nameClass = other.m_nameClass;
 	m_profSub = other.m_profSub;
-	m_smena = other.m_profSub;
+	m_smena = other.m_smena;
 	return *this;
 }
