@@ -9,6 +9,7 @@
 #include "Models/UserInheritance/student.h"
 #include "Models/UserInheritance/Teacher.h"
 #include "Containers/MySchool.h"
+#include "Containers/MyStudent.h"
 
 const int AR_SIZE = 10;
 const int maxCount = 50;
@@ -97,16 +98,16 @@ void addSchool(MySchool* school) {
     system("pause");
     system("cls");
 }
-void addStudent(Student* student) {
+void addStudent(MyStudent* student) {
     int count{};
-    using namespace KVA;
     cout << "Введите кол-во объектов класса Student: ";
     cin >> count;
-    for (int i = c2; i < (c2 + count); i++) {
+    for (int i = 0; i < count; i++) {
         cout << "\nВвод информации об объекте класса #" << i + 1;
-        cin >> student[i];
+        Student tmp_student{};
+        cin >> tmp_student;
+        student->addStudent(tmp_student);
     }
-    c2 += count;
     system("pause");
     system("cls");
 }
@@ -123,7 +124,7 @@ void addTeacher(Teacher* teacher) {
     system("pause");
     system("cls");
 }
-void addUser(MySchool* school, Student* student, Teacher* teacher) {
+void addUser(MySchool* school, MyStudent* student, Teacher* teacher) {
     system("cls");
     using namespace KVA;
     cout << "Выберите класс для добавления:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
@@ -152,11 +153,12 @@ void printSchool(MySchool* school) {
     system("pause");
     cout << "\n\n";
 }
-void printStudent(Student* student) {
-    using namespace KVA;
-    for (int i = 0; i < c2; i++) {
+void printStudent(MyStudent* student) {
+    int i{};
+    for (Student it : *student) {
         cout << "\n\nВывод информации об объектах класса Student номер " << i + 1 << "\n";
-        cout << student[i] << endl;
+        cout << it;
+        i++;
     }
     system("pause");
     cout << "\n\n";
@@ -170,7 +172,7 @@ void printTeacher(Teacher* teacher) {
     system("pause");
     cout << "\n\n";
 }
-void printUser(MySchool* school, Student* student, Teacher* teacher) {
+void printUser(MySchool* school, MyStudent* student, Teacher* teacher) {
     system("cls");
     cout << "Выберите класс для вывода информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
@@ -207,19 +209,14 @@ void deleteTeacher(Teacher* teacher) {
     c3--;
     cout << "\n\n";
 }
-void deleteStudent(Student* student) {
-    using namespace KVA;
+void deleteStudent(MyStudent* student) {
     printStudent(student);
     cout << "\nВыберите номер объекта для удаления: ";
     int deleteNum{};
     cin >> deleteNum;
-    for (int i = (deleteNum - 1); i < (maxCount-1); i++) {
-        student[i] = student[i + 1];
-    }
-    c2--;
-    cout << "\n\n";
+    student->deleteStudent(deleteNum - 1);
 }
-void deleteUser(MySchool* school, Student* student, Teacher *teacher) {
+void deleteUser(MySchool* school, MyStudent* student, Teacher *teacher) {
     system("cls");
     cout << "Выберите класс для удаления информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
@@ -242,16 +239,9 @@ void sortSchool(MySchool* school) {
     school->sortSchool();
     printSchool(school);
 }
-void sortStudent(Student* student) {
-    using namespace KVA;
+void sortStudent(MyStudent* student) {
     system("cls");
-    for (int i = 0; i < c2 - 1; i++) {
-        if (student[i] > student[i + 1]) {
-            Student tempStudent = student[i + 1];
-            student[i + 1] = student[i];
-            student[i] = tempStudent;
-        }
-    }
+    student->sortStudent();
     printStudent(student);
 }
 void sortTeacher(Teacher* teacher) {
@@ -266,7 +256,7 @@ void sortTeacher(Teacher* teacher) {
     }
     printTeacher(teacher);
 }
-void sortUser(MySchool *school, Student *student, Teacher *teacher) {
+void sortUser(MySchool *school, MyStudent *student, Teacher *teacher) {
     system("cls");
     cout << "Выберите класс для соритровки информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
@@ -283,14 +273,40 @@ void sortUser(MySchool *school, Student *student, Teacher *teacher) {
         break;
     }
 }
-void editUser(MySchool* school) {
+void editSchool(MySchool* school) {
     system("cls");
     int index{};
     printSchool(school);
     cout << "Введите индекс элемента для изменения:";
     cin >> index;
-    school->EditSchool(index-1);
+    school->EditSchool(index - 1);
 }
+void editStudent(MyStudent* student) {
+    system("cls");
+    int index{};
+    printStudent(student);
+    cout << "Введит индекс элемента для изменения:";
+    cin >> index;
+    student->EditStudent(index - 1);
+}
+void editUser(MySchool* school, MyStudent* student) {
+    system("cls");
+    cout << "Выберите класс для изменения информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
+    int switcher{};
+    cin >> switcher;
+    switch (switcher) {
+    case 1:
+        editSchool(school);
+        break;
+    case 2:
+        editStudent(student);
+        break;
+    case 3:
+        //sortTeacher(teacher);
+        break;
+    }
+}
+
 
 int Users() {
     return 4;
@@ -319,7 +335,7 @@ int main() {
     using namespace KVA;
     setlocale(LC_ALL, "Russian");
     srand(time(NULL));
-    Student* student = new Student[maxCount];
+    MyStudent* studentArray = new MyStudent;
     Teacher* teacher = new Teacher[maxCount];
     MySchool* schoolArray = new MySchool;
     MyMenuItem items[items_number]
@@ -349,19 +365,19 @@ int main() {
                 system("cls");
                 managerOfMenu.runSubMenu();
                 if (managerOfMenu.getSub_select() == addUser()) {
-                    addUser(schoolArray, student, teacher);
+                    addUser(schoolArray, studentArray, teacher);
                 }
                 else if (managerOfMenu.getSub_select() == printUser()) {
-                    printUser(schoolArray, student, teacher);
+                    printUser(schoolArray, studentArray, teacher);
                 }
                 else if (managerOfMenu.getSub_select() == deleteUser()) {
-                    deleteUser(schoolArray, student, teacher);
+                    deleteUser(schoolArray, studentArray, teacher);
                 }
                 else if (managerOfMenu.getSub_select() == sortUser()) {
-                    sortUser(schoolArray, student, teacher);
+                    sortUser(schoolArray, studentArray, teacher);
                 }
                 else if (managerOfMenu.getSub_select() == editUser()) {
-                    editUser(schoolArray);
+                    editUser(schoolArray, studentArray);
                 }
             } while (managerOfMenu.getSub_select() != backMainMenu());
             system("cls");
