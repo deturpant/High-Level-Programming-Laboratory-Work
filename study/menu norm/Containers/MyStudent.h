@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Models/UserInheritance/Student.h"
+#include "../Models/UserInheritance/Student.h"
 using namespace std;
 
 class MyStudent {

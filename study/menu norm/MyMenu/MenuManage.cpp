@@ -1,7 +1,7 @@
 #include "MenuManage.h"
-#include "/study/menu norm/menu norm/Models/ClassRoom/School.h"
-#include "/study/menu norm/menu norm/Models/UserInheritance/student.h"
-#include "/study/menu norm/menu norm/Models/UserInheritance/Teacher.h"
+#include "../Models/ClassRoom/School.h"
+#include "../Models/UserInheritance/Student.h"
+#include "../Models/UserInheritance/Teacher.h"
 using namespace KVA;
 
 MenuManage::MenuManage(MyMenu mainMenu, MyMenu subMenu) {

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Models/ClassRoom/School.h"
+#include "../Models/ClassRoom/School.h"
 using namespace std;
 
 class MySchool {
