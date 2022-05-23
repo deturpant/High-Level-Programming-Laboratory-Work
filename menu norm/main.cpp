@@ -8,9 +8,7 @@
 #include "Models/ClassRoom/School.h"
 #include "Models/UserInheritance/student.h"
 #include "Models/UserInheritance/Teacher.h"
-#include "Containers/MySchool.h"
-#include "Containers/MyStudent.h"
-#include "Containers/MyTeacher.h"
+#include "Containers/MyVector.h"
 
 const int AR_SIZE = 10;
 const int maxCount = 50;
@@ -79,7 +77,7 @@ const int items_number = 5;
 
 
 
-void addSchool(MySchool* school) {
+void addSchool(MyVector<School>* school) {
     int count{};
     cout << "\nВведите кол-во объектов класса School: ";
     cin >> count;
@@ -87,12 +85,12 @@ void addSchool(MySchool* school) {
         cout << "\nВвод информации об объекте класса School:";
         School tmp_school{};
         cin >> tmp_school;
-        school->addSchool(tmp_school);
+        school->addVector(tmp_school);
     }
     system("pause");
     system("cls");
 }
-void addStudent(MyStudent* student) {
+void addStudent(MyVector<Student>* student) {
     int count{};
     cout << "Введите кол-во объектов класса Student: ";
     cin >> count;
@@ -100,12 +98,12 @@ void addStudent(MyStudent* student) {
         cout << "\nВвод информации об объекте класса #" << i + 1;
         Student tmp_student{};
         cin >> tmp_student;
-        student->addStudent(tmp_student);
+        student->addVector(tmp_student);
     }
     system("pause");
     system("cls");
 }
-void addTeacher(MyTeacher* teacher) {
+void addTeacher(MyVector<Teacher>* teacher) {
     int count{};
     cout << "Введите кол-во объектов класса Teacher: ";
     cin >> count;
@@ -113,12 +111,12 @@ void addTeacher(MyTeacher* teacher) {
         cout << "\nВвод информации об объекте класса #" << i + 1;
         Teacher tmp_teacher{};
         cin >> tmp_teacher;
-        teacher->addTeacher(tmp_teacher);
+        teacher->addVector(tmp_teacher);
     }
     system("pause");
     system("cls");
 }
-void addUser(MySchool* school, MyStudent* student, MyTeacher* teacher) {
+void addUser(MyVector<School>* school, MyVector<Student>* student, MyVector<Teacher>* teacher) {
     system("cls");
     cout << "Выберите класс для добавления:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
@@ -136,7 +134,7 @@ void addUser(MySchool* school, MyStudent* student, MyTeacher* teacher) {
     }
 }
 
-void printSchool(MySchool* school) {
+void printSchool(MyVector<School>* school) {
     int i{};
     for (School it: *school) {
         cout << "\n\nВывод информации об объектах класса School номер " << i + 1 << "\n";
@@ -146,7 +144,7 @@ void printSchool(MySchool* school) {
     system("pause");
     cout << "\n\n";
 }
-void printStudent(MyStudent* student) {
+void printStudent(MyVector<Student>* student) {
     int i{};
     for (Student it : *student) {
         cout << "\n\nВывод информации об объектах класса Student номер " << i + 1 << "\n";
@@ -156,7 +154,7 @@ void printStudent(MyStudent* student) {
     system("pause");
     cout << "\n\n";
 }
-void printTeacher(MyTeacher* teacher) {
+void printTeacher(MyVector<Teacher>* teacher) {
     int i{};
     for (Teacher it: *teacher) {
         cout << "\n\nВывод информации об объектах класса Teacher номер " << i + 1 << "\n";
@@ -166,7 +164,7 @@ void printTeacher(MyTeacher* teacher) {
     system("pause");
     cout << "\n\n";
 }
-void printUser(MySchool* school, MyStudent* student, MyTeacher* teacher) {
+void printUser(MyVector<School>* school, MyVector<Student>* student, MyVector<Teacher>* teacher) {
     system("cls");
     cout << "Выберите класс для вывода информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
@@ -184,34 +182,34 @@ void printUser(MySchool* school, MyStudent* student, MyTeacher* teacher) {
     }
 }
 
-void deleteSchool(MySchool* school) {
+void deleteSchool(MyVector<School>* school) {
     printSchool(school);
     cout << "\nВыберите номер объекта для удаления: ";
     int deleteNum{};
     cin >> deleteNum;
-    school->deleteSchool(deleteNum-1);
+    school->deleteVector(deleteNum-1);
     cout << "Удаление завершено.";
     system("pause");
 }
-void deleteTeacher(MyTeacher* teacher) {
+void deleteTeacher(MyVector<Teacher>* teacher) {
     printTeacher(teacher);
     cout << "\nВыберите номер объекта для удаления: ";
     int deleteNum{};
     cin >> deleteNum;
-    teacher->deleteTeacher(deleteNum - 1);
+    teacher->deleteVector(deleteNum - 1);
     cout << "Удаление завершено.";
     system("pause");
 }
-void deleteStudent(MyStudent* student) {
+void deleteStudent(MyVector<Student>* student) {
     printStudent(student);
     cout << "\nВыберите номер объекта для удаления: ";
     int deleteNum{};
     cin >> deleteNum;
-    student->deleteStudent(deleteNum - 1);
+    student->deleteVector(deleteNum - 1);
     cout << "Удаление завершено.";
     system("pause");
 }
-void deleteUser(MySchool* school, MyStudent* student, MyTeacher *teacher) {
+void deleteUser(MyVector<School>* school, MyVector<Student>* student, MyVector<Teacher> *teacher) {
     system("cls");
     cout << "Выберите класс для удаления информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
@@ -229,22 +227,22 @@ void deleteUser(MySchool* school, MyStudent* student, MyTeacher *teacher) {
     }
 
 }
-void sortSchool(MySchool* school) {
+void sortSchool(MyVector<School>* school) {
     system("cls");
-    school->sortSchool();
+    school->sortVector();
     printSchool(school);
 }
-void sortStudent(MyStudent* student) {
+void sortStudent(MyVector<Student>* student) {
     system("cls");
-    student->sortStudent();
+    student->sortVector();
     printStudent(student);
 }
-void sortTeacher(MyTeacher* teacher) {
+void sortTeacher(MyVector<Teacher>* teacher) {
     system("cls");
-    teacher->sortTeacher();
+    teacher->sortVector();
     printTeacher(teacher);
 }
-void sortUser(MySchool *school, MyStudent *student, MyTeacher *teacher) {
+void sortUser(MyVector<School> *school, MyVector<Student>* student, MyVector<Teacher> *teacher) {
     system("cls");
     cout << "Выберите класс для соритровки информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
@@ -261,31 +259,31 @@ void sortUser(MySchool *school, MyStudent *student, MyTeacher *teacher) {
         break;
     }
 }
-void editSchool(MySchool* school) {
+void editSchool(MyVector<School>* school) {
     system("cls");
     int index{};
     printSchool(school);
     cout << "Введите индекс элемента для изменения:";
     cin >> index;
-    school->EditSchool(index - 1);
+    school->editVector(index - 1);
 }
-void editStudent(MyStudent* student) {
+void editStudent(MyVector<Student>* student) {
     system("cls");
     int index{};
     printStudent(student);
     cout << "Введит индекс элемента для изменения:";
     cin >> index;
-    student->EditStudent(index - 1);
+    student->editVector(index - 1);
 }
-void editTeacher(MyTeacher* teacher) {
+void editTeacher(MyVector<Teacher>* teacher) {
     system("cls");
     int index{};
     printTeacher(teacher);
     cout << "Введит индекс элемента для изменения:";
     cin >> index;
-    teacher->editTeacher(index - 1);
+    teacher->editVector(index - 1);
 }
-void editUser(MySchool* school, MyStudent* student, MyTeacher* teacher) {
+void editUser(MyVector<School>* school, MyVector<Student>* student, MyVector<Teacher>* teacher) {
     system("cls");
     cout << "Выберите класс для изменения информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
@@ -331,9 +329,9 @@ int main() {
     using namespace KVA;
     setlocale(LC_ALL, "Russian");
     srand(time(NULL));
-    MyStudent* studentArray = new MyStudent;
-    MyTeacher* teacherArray = new MyTeacher;
-    MySchool* schoolArray = new MySchool;
+    MyVector<Student>* studentArray = new MyVector<Student>;
+    MyVector<Teacher>* teacherArray = new MyVector<Teacher>;
+    MyVector<School>* schoolArray = new MyVector<School>;
     MyMenuItem items[items_number]
     { 
         MyMenuItem{"Sqrt from 25", sqr25}, 
