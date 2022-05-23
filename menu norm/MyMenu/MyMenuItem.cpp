@@ -1,4 +1,4 @@
-#include "MyMenuItem.h"
+#include "../MyMenu/MyMenuItem.h"
 #include <iostream>
 
 namespace KVA {

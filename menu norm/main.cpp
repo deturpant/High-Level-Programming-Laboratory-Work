@@ -1,17 +1,16 @@
 ﻿#include <iostream>
 #include <cstdlib>
 #include <string>
-#include "MyMenu/MenuManage.h"
-#include "MyMenu/MyMenu.h"
-#include "MyMenu/MyMenuItem.h"
-#include "Models/UserInheritance/User.h"
-#include "Models/ClassRoom/School.h"
-#include "Models/UserInheritance/student.h"
-#include "Models/UserInheritance/Teacher.h"
-#include "Containers/MyVector.h"
+#include "../menu norm/MyMenu/MenuManage.h"
+#include "../menu norm/MyMenu/MyMenu.h"
+#include "../menu norm/MyMenu/MyMenuItem.h"
+#include "../menu norm/Models/UserInheritance/User.h"
+#include "../menu norm/Models/ClassRoom/School.h"
+#include "../menu norm/Models/UserInheritance/student.h"
+#include "../menu norm/Models/UserInheritance/Teacher.h"
+#include "../menu norm/Containers/MyVector.h"
 
 const int AR_SIZE = 10;
-const int maxCount = 50;
 const int runMenuUsers = 6;
 
 #pragma region
