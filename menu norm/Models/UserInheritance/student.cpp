@@ -44,6 +44,9 @@ istream& operator>>(istream& in, Student& obj) {
 	in >> obj.m_nameClass;
 	cout << "¬ведите отметку: ";
 	in >> obj.m_grade;
+	if (obj.m_grade <= 0 || obj.m_grade > 5) {
+		throw exception("¬ведена некорректна€ отметка!");
+	}
 	cout << endl;
 	return in;
 }

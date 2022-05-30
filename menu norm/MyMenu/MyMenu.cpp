@@ -39,6 +39,9 @@ namespace KVA {
         print();
         std::cout << "\n   Select >> ";
         std::cin >> m_select;
+        if (m_select > m_count || m_select <= 0) {
+            throw "Ошибка ввода!\n\n";
+        }
         return m_items[m_select - 1].run();
     }
     void MyMenu::setMenuPtr(int *ptr) {

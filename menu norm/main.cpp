@@ -80,11 +80,18 @@ void addSchool(MyVector<School>* school) {
     int count{};
     cout << "\nВведите кол-во объектов класса School: ";
     cin >> count;
-    for (int i = 0; i < count; i++) {
-        cout << "\nВвод информации об объекте класса School:";
-        School tmp_school{};
-        cin >> tmp_school;
-        school->addVector(tmp_school);
+    if (!cin) {
+        cout << "Ошибка ввода!\n";
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    else {
+        for (int i = 0; i < count; i++) {
+            cout << "\nВвод информации об объекте класса School:" << school->getLen() + 1;
+            School tmp_school{};
+            cin >> tmp_school;
+            school->addVector(tmp_school);
+        }
     }
     system("pause");
     system("cls");
@@ -93,12 +100,25 @@ void addStudent(MyVector<Student>* student) {
     int count{};
     cout << "Введите кол-во объектов класса Student: ";
     cin >> count;
-    for (int i = 0; i < count; i++) {
-        cout << "\nВвод информации об объекте класса #" << i + 1;
-        Student tmp_student{};
-        cin >> tmp_student;
-        student->addVector(tmp_student);
+    if (!cin) {
+        cout << "Ошибка ввода!\n";
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
+    else {
+        for (int i = 0; i < count; i++) {
+            try {
+                cout << "\nВвод информации об объекте класса #" << student->getLen() + 1;
+                Student tmp_student{};
+                cin >> tmp_student;
+                student->addVector(tmp_student);
+            }
+            catch (exception& ex) {
+                cout << ex.what() << endl;
+            }
+        }
+    }
+
     system("pause");
     system("cls");
 }
@@ -106,12 +126,20 @@ void addTeacher(MyVector<Teacher>* teacher) {
     int count{};
     cout << "Введите кол-во объектов класса Teacher: ";
     cin >> count;
-    for (int i = 0; i < count; i++) {
-        cout << "\nВвод информации об объекте класса #" << i + 1;
-        Teacher tmp_teacher{};
-        cin >> tmp_teacher;
-        teacher->addVector(tmp_teacher);
+    if (!cin) {
+        cout << "Ошибка ввода!\n";
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
+    else {
+        for (int i = 0; i < count; i++) {
+            cout << "\nВвод информации об объекте класса #" << teacher->getLen() + 1;
+            Teacher tmp_teacher{};
+            cin >> tmp_teacher;
+            teacher->addVector(tmp_teacher);
+        }
+    }
+
     system("pause");
     system("cls");
 }
@@ -165,19 +193,25 @@ void printTeacher(MyVector<Teacher>* teacher) {
 }
 void printUser(MyVector<School>* school, MyVector<Student>* student, MyVector<Teacher>* teacher) {
     system("cls");
-    cout << "Выберите класс для вывода информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
-    int switcher{};
-    cin >> switcher;
-    switch (switcher) {
-    case 1:
-        printSchool(school);
-        break;
-    case 2:
-        printStudent(student);
-        break;
-    case 3:
-        printTeacher(teacher);
-        break;
+    try {
+        cout << "Выберите класс для вывода информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
+        int switcher{};
+        cin >> switcher;
+        switch (switcher) {
+        case 1:
+            printSchool(school);
+            break;
+        case 2:
+            printStudent(student);
+            break;
+        case 3:
+            printTeacher(teacher);
+            break;
+        }
+    }
+    catch (exception& ex) {
+        cout << "Массив пустой!\n";
+        system("pause");
     }
 }
 
@@ -186,9 +220,15 @@ void deleteSchool(MyVector<School>* school) {
     cout << "\nВыберите номер объекта для удаления: ";
     int deleteNum{};
     cin >> deleteNum;
-    school->deleteVector(deleteNum-1);
-    cout << "Удаление завершено.";
+    try {
+        school->deleteVector(deleteNum - 1);
+        cout << "Удаление завершено.";
+    }
+    catch (const char* msg) {
+        cout << msg;
+    }
     system("pause");
+    
 }
 void deleteTeacher(MyVector<Teacher>* teacher) {
     printTeacher(teacher);
@@ -213,33 +253,60 @@ void deleteUser(MyVector<School>* school, MyVector<Student>* student, MyVector<T
     cout << "Выберите класс для удаления информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
     int switcher{};
     cin >> switcher;
-    switch (switcher) {
-    case 1:
-        deleteSchool(school);
-        break;
-    case 2:
-        deleteStudent(student);
-        break;
-    case 3:
-        deleteTeacher(teacher);
-        break;
+    try {
+        switch (switcher) {
+        case 1:
+            deleteSchool(school);
+            break;
+        case 2:
+            deleteStudent(student);
+            break;
+        case 3:
+            deleteTeacher(teacher);
+            break;
+        }
     }
+    catch (exception& ex) {
+        cout << "Массив пустой!\n";
+        system("pause");
+    }
+
 
 }
 void sortSchool(MyVector<School>* school) {
-    system("cls");
-    school->sortVector();
-    printSchool(school);
+    try {
+        system("cls");
+        school->sortVector();
+        printSchool(school);
+    }
+    catch (const char* msg) {
+        cout << msg;
+        system("pause");
+    }
+
 }
 void sortStudent(MyVector<Student>* student) {
-    system("cls");
-    student->sortVector();
-    printStudent(student);
+    try {
+        system("cls");
+        student->sortVector();
+        printStudent(student);
+    }
+    catch (const char* msg) {
+        cout << msg;
+        system("pause");
+    }
+
 }
 void sortTeacher(MyVector<Teacher>* teacher) {
-    system("cls");
-    teacher->sortVector();
-    printTeacher(teacher);
+    try {
+        system("cls");
+        teacher->sortVector();
+        printTeacher(teacher);
+    }
+    catch (const char* msg) {
+        cout << msg;
+        system("pause");
+    }
 }
 void sortUser(MyVector<School> *school, MyVector<Student>* student, MyVector<Teacher> *teacher) {
     system("cls");
@@ -263,41 +330,63 @@ void editSchool(MyVector<School>* school) {
     int index{};
     printSchool(school);
     cout << "Введите индекс элемента для изменения:";
-    cin >> index;
-    school->editVector(index - 1);
+    try {
+        cin >> index;
+        school->editVector(index - 1);
+    }
+    catch (const char* msg) {
+        cout << msg;
+    }
 }
 void editStudent(MyVector<Student>* student) {
     system("cls");
     int index{};
     printStudent(student);
     cout << "Введит индекс элемента для изменения:";
-    cin >> index;
-    student->editVector(index - 1);
+    try {
+        cin >> index;
+        student->editVector(index - 1);
+    }
+    catch (const char* msg) {
+        cout << msg;
+    }
 }
 void editTeacher(MyVector<Teacher>* teacher) {
     system("cls");
     int index{};
     printTeacher(teacher);
     cout << "Введит индекс элемента для изменения:";
-    cin >> index;
-    teacher->editVector(index - 1);
+    try {
+        cin >> index;
+        teacher->editVector(index - 1);
+    }
+    catch (const char* msg) {
+        cout << msg;
+    }
 }
 void editUser(MyVector<School>* school, MyVector<Student>* student, MyVector<Teacher>* teacher) {
     system("cls");
-    cout << "Выберите класс для изменения информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
-    int switcher{};
-    cin >> switcher;
-    switch (switcher) {
-    case 1:
-        editSchool(school);
-        break;
-    case 2:
-        editStudent(student);
-        break;
-    case 3:
-        editTeacher(teacher);
-        break;
+    try {
+        cout << "Выберите класс для изменения информации:\n1. School\n2. Student\n3. Teacher\nSelect >> ";
+        int switcher{};
+        cin >> switcher;
+        switch (switcher) {
+        case 1:
+            editSchool(school);
+            break;
+        case 2:
+            editStudent(student);
+            break;
+        case 3:
+            editTeacher(teacher);
+            break;
+        }
     }
+    catch (exception& ex) {
+        cout << "Массив пустой!\n";
+        system("pause");
+    }
+
 }
 
 
@@ -324,6 +413,32 @@ int backMainMenu() {
 }
 #pragma endregion
 
+void startProgram(MenuManage managerOfMenu, MyVector<Student>* studentArray, MyVector<Teacher>* teacherArray, MyVector<School>* schoolArray) {
+    while (managerOfMenu.runMainMenu()) {
+        if (managerOfMenu.getMain_select() == Users()) {
+            do {
+                system("cls");
+                managerOfMenu.runSubMenu();
+                if (managerOfMenu.getSub_select() == addUser()) {
+                    addUser(schoolArray, studentArray, teacherArray);
+                }
+                else if (managerOfMenu.getSub_select() == printUser()) {
+                    printUser(schoolArray, studentArray, teacherArray);
+                }
+                else if (managerOfMenu.getSub_select() == deleteUser()) {
+                    deleteUser(schoolArray, studentArray, teacherArray);
+                }
+                else if (managerOfMenu.getSub_select() == sortUser()) {
+                    sortUser(schoolArray, studentArray, teacherArray);
+                }
+                else if (managerOfMenu.getSub_select() == editUser()) {
+                    editUser(schoolArray, studentArray, teacherArray);
+                }
+            } while (managerOfMenu.getSub_select() != backMainMenu());
+            system("cls");
+        }
+    };
+}
 int main() {
     using namespace KVA;
     setlocale(LC_ALL, "Russian");
@@ -352,29 +467,14 @@ int main() {
     };
     MyMenu menu_user("Users Menu", items_user, runMenuUsers);
     MenuManage managerOfMenu(menu, menu_user);
-    while (managerOfMenu.runMainMenu()) {
-        if (managerOfMenu.getMain_select() == Users()) {
-            do {
-                system("cls");
-                managerOfMenu.runSubMenu();
-                if (managerOfMenu.getSub_select() == addUser()) {
-                    addUser(schoolArray, studentArray, teacherArray);
-                }
-                else if (managerOfMenu.getSub_select() == printUser()) {
-                    printUser(schoolArray, studentArray, teacherArray);
-                }
-                else if (managerOfMenu.getSub_select() == deleteUser()) {
-                    deleteUser(schoolArray, studentArray, teacherArray);
-                }
-                else if (managerOfMenu.getSub_select() == sortUser()) {
-                    sortUser(schoolArray, studentArray, teacherArray);
-                }
-                else if (managerOfMenu.getSub_select() == editUser()) {
-                    editUser(schoolArray, studentArray, teacherArray);
-                }
-            } while (managerOfMenu.getSub_select() != backMainMenu());
-            system("cls");
+    while (true) {
+        try {
+            startProgram(managerOfMenu, studentArray, teacherArray, schoolArray);
         }
-    };
+        catch (const char* msg) {
+            cout << msg;
+        }
+    }
+
     return 0;
 }

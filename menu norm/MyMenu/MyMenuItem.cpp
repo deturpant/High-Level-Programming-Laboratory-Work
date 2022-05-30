@@ -1,5 +1,6 @@
 #include "../MyMenu/MyMenuItem.h"
 #include <iostream>
+using namespace std;
 
 namespace KVA {
     MyMenuItem::MyMenuItem(char *item_name, Func func) : m_item_name(item_name), m_func(func) {}

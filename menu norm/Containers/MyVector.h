@@ -45,6 +45,9 @@ public:
 		delete[] m_tmp;
 	}
 	void deleteVector(int index) {
+		if (m_len < index+1 || index<0) {
+			throw("Введен некорректный индекс\n");
+		}
 		T* m_tmp = m_vector;
 		m_vector = new T[--m_len]{};
 		int i{};
@@ -58,6 +61,9 @@ public:
 		delete[] m_tmp;
 	}
 	void sortVector() {
+		if (m_len < 1) {
+			throw("Массив пуст!\n");
+		}
 		for (size_t j{}; j < m_len - 1; j++) {
 			for (size_t i{}; i < m_len - 1; i++) {
 				if (m_vector[i] > m_vector[i + 1]) {
@@ -69,6 +75,12 @@ public:
 		}
 	}
 	void editVector(int index) {
+		if (m_len < 1) {
+			throw("Массив пуст!\n");
+		}
+		else if (m_len < index + 1 || index < 0) {
+			throw("Введен некорректный индекс\n");
+		}
 		cout << "Введите новые данные:";
 		cin >> m_vector[index];
 		cout << "Данные изменены.\n";
